@@ -1,9 +1,9 @@
 import config from "../config";
-import model from "../model/straw";
+import model from "../model/wall";
 import canvasAbstract from "./canvasAbstract";
-class Straw extends canvasAbstract {
+class Wall extends canvasAbstract {
   num(): number {
-    return config.straw.num
+    return config.wall.num
   }
   model(): ModelConstructor {
     return model
@@ -13,4 +13,4 @@ class Straw extends canvasAbstract {
     super.renderModels()
   }
 }
-export default new Straw()
+export default new Wall()
