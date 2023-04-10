@@ -5,6 +5,7 @@ import { image, promises } from './service/image'
 import wall from './canvas/wall'
 import whiteWall from './canvas/whiteWall'
 import water from './canvas/water'
+import tank from './canvas/tank'
 
 const app = document.querySelector<HTMLDivElement>('#app')!
 app.style.width = config.canvas.width + 'px'
@@ -16,6 +17,7 @@ async function bootstrap() {
   wall.render()
   whiteWall.render()
   water.render()
+  tank.render()
 }
 
 void bootstrap()

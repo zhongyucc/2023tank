@@ -1,7 +1,7 @@
 import config from "../config";
 import model from "../model/straw";
 import canvasAbstract from "./canvasAbstract";
-class Straw extends canvasAbstract {
+class Straw extends canvasAbstract implements ICanvas {
   num(): number {
     return config.straw.num
   }
