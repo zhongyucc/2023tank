@@ -1,3 +1,7 @@
+import wall from "../canvas/wall";
+import water from "../canvas/water";
+import Tank from "../canvas/tank";
+import whiteWall from "../canvas/whiteWall";
 import config from "../config";
 import { directionEnum } from "../enum/directionEnum";
 import { image } from "../service/image";
@@ -6,10 +10,14 @@ import _ from 'lodash'
 
 
 export default class tank extends modelAbstract {
+  canvas: ICanvas = Tank;
   name: string = 'tank'
-
   render(): void {
     this.move()
+    Math.floor(Math.random() * 5) == 1
+    if (_.random(20) == 1) {
+      this.direction = directionEnum.bottom
+    }
   }
   protected move(): void {
     while (true) {
@@ -17,19 +25,19 @@ export default class tank extends modelAbstract {
       let y = this.y
       switch (this.direction) {
         case directionEnum.top:
-          y--
+          y-=2
           break
         case directionEnum.right:
-          x++
+          x+=2
           break
         case directionEnum.bottom:
-          y++
+          y+=2
           break
         case directionEnum.left:
-         x--
+          x-=2
           break
       }
-      if (this.isTouch(x, y)==true) {
+      if (this.isTouch(x, y) == true) {
         this.randomDirection()
       } else {
         this.x = x
@@ -39,8 +47,16 @@ export default class tank extends modelAbstract {
     }
     super.draw()
   }
-  protected isTouch(x: number, y: number) {
-    if (x < 0 || x + this.width > config.canvas.width || y < 0 || y + this.height > config.canvas.width) return true
+  protected isTouch(x: number, y: number): boolean {
+    if (x < 0 || x + this.width > config.canvas.width || y < 0 || y + this.height > config.canvas.height) { return true }
+    const models = [...water.models, ...wall.models, ...whiteWall.models]
+    return models.some(model => {
+      const state = x + this.width <= model.x ||
+        x >= model.x + model.width ||
+        y + this.height <= model.y ||
+        y >= model.y + model.height
+      return !state
+    })
   }
 
   image() {

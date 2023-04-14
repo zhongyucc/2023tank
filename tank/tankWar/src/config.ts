@@ -6,8 +6,9 @@ import tankLeft from "./static/images/tank/left.gif"
 import tankBottom from "./static/images/tank/bottom.gif"
 import tankTop from "./static/images/tank/top.gif"
 import tankRight from "./static/images/tank/right.gif"
+import bullet from "./static/images/bullet/bullet.jpg"
 export default{
-  timeout:50,
+  timeout:10,
   canvas:{
     width:900,
     height:600
@@ -20,16 +21,16 @@ export default{
     num:100
   },
   wall:{
-    num:100
+    num:50
   },
   whiteWall:{
-    num:50
+    num:20
   },
   water:{
     num:30
   },
   tank:{
-    num:20,
+    num:300,
   },
   images:{
     straw,
@@ -39,6 +40,7 @@ export default{
     tankTop,
     tankRight,
     tankBottom,
-    tankLeft
+    tankLeft,
+    bullet
   }
 }

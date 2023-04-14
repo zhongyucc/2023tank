@@ -1,14 +1,22 @@
 /// <reference types="vite/client" />
 interface  ModelConstructor{
-  new (canvas:CanvasRenderingContext2D,x:number,y:number):IModel
+  new (x:number,y:number):IModel
+}
+interface  BulletModelConstructor{
+  new (tank:IModel):IModel
 }
 interface IModel{
-  render():void,
-  x:number,
-  y:number,
+  render():void
+  x:number
+  y:number
+  width:number
+  height:number
+  tank?:IModel
+  direction:string
   image():HTMLImageElement
 }
 interface ICanvas{
-  model():ModelConstructor
+  model():ModelConstructor | BulletModelConstructor
   num():number
+  ctx:CanvasRenderingContext2D
 }
