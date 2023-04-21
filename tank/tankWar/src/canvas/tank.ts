@@ -14,7 +14,7 @@ export default new ( class tank extends canvasAbstract implements ICanvas {
     this.renderModels()
     setInterval(()=>this.renderModels(),config.timeout)
   }
-  protected renderModels(){
+  public renderModels(){
     this.ctx.clearRect(0,0,config.canvas.width,config.canvas.height)
     this.models.forEach(model => {
       model.render()

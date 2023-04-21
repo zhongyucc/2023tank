@@ -14,9 +14,12 @@ interface IModel{
   tank?:IModel
   direction:string
   image():HTMLImageElement
+  destroy(): void
 }
 interface ICanvas{
   model():ModelConstructor | BulletModelConstructor
   num():number
   ctx:CanvasRenderingContext2D
+  removeModel(model:IModel):void
+  renderModels():void
 }

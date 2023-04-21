@@ -3,8 +3,8 @@ import { directionEnum } from "../enum/directionEnum";
 
 export default abstract class modelAbstract{
   protected abstract name:string
-  protected abstract render():void
-  protected abstract image():HTMLImageElement
+  public abstract render():void
+  public abstract image():HTMLImageElement
   abstract canvas:ICanvas
   constructor(public x:number,public y:number){
     this.randomDirection()
@@ -18,5 +18,9 @@ export default abstract class modelAbstract{
   // 随机方向
   protected randomDirection() {
     this.direction = Object.keys(directionEnum)[Math.floor(Math.random() * 4)] as directionEnum
+  }
+  public destroy(){
+    this.canvas.removeModel(this)
+    this.canvas.renderModels()
   }
 }

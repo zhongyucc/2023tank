@@ -7,6 +7,7 @@ import { directionEnum } from "../enum/directionEnum";
 import { image } from "../service/image";
 import modelAbstract from "./modelAbstract";
 import _ from 'lodash'
+import util from "../util";
 
 
 export default class tank extends modelAbstract {
@@ -37,7 +38,7 @@ export default class tank extends modelAbstract {
           x-=2
           break
       }
-      if (this.isTouch(x, y) == true) {
+      if (util.isModelTouch(x, y) || util.isCanvasTouch(x,y)) {
         this.randomDirection()
       } else {
         this.x = x

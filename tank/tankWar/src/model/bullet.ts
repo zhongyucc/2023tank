@@ -2,6 +2,7 @@ import bullet from "../canvas/bullet"
 import config from "../config"
 import { directionEnum } from "../enum/directionEnum"
 import { image } from "../service/image"
+import util from "../util"
 import modelAbstract from "./modelAbstract"
 
 export default class Bullet extends modelAbstract {
@@ -32,10 +33,19 @@ export default class Bullet extends modelAbstract {
         x -= 2
         break
     }
-    // 碰撞检测
-    this.x = x
-    this.y = y
-    this.draw()
+    const touchModel=util.isModelTouch(x,y,2,2)
+    if (util.isCanvasTouch(x, y, 2, 2)) {
+      this.destroy()
+    }else if(touchModel){
+      this.destroy()
+      touchModel.destroy()
+    }
+     else {
+      // 碰撞检测
+      this.x = x
+      this.y = y
+      this.draw()
+    }
   }
   protected draw() {
     this.canvas.ctx.drawImage(this.image(), this.x, this.y, 2, 2)

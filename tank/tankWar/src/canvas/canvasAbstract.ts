@@ -1,4 +1,5 @@
 import config from "../config"
+import modelAbstract from "../model/modelAbstract"
 import position from "../service/position"
 
 export default abstract class canvasAbstract {
@@ -23,16 +24,18 @@ export default abstract class canvasAbstract {
   // 生成模型实例
   protected createModels() { 
     position.positionCollection(this.num()).forEach(position=>{
-      const model = this.model()
+      const model = this.model() as ModelConstructor
       const instance = new model(position.x,position.y)
       this.models.push(instance)
     })
   }
   // 将模型渲染到画布上
-  protected renderModels(){
-    this.models.forEach(model => {
-      // this.canvas.drawImage(model.image(),model.x,model.y,config.model.width,config.model.height)
-      model.render()
-    })
+  public renderModels(){
+    this.ctx.clearRect(0,0,config.canvas.width,config.canvas.height)
+    this.models.forEach(model => model.render())
+  }
+  // 移除画布
+  public removeModel(model:IModel){
+    this.models = this.models.filter(m=>m!=model)
   }
 }
