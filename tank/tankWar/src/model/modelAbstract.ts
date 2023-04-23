@@ -1,8 +1,9 @@
 import config from "../config";
 import { directionEnum } from "../enum/directionEnum";
+import audio from "../service/audio";
 
 export default abstract class modelAbstract{
-  protected abstract name:string
+  public abstract name:string
   public abstract render():void
   public abstract image():HTMLImageElement
   abstract canvas:ICanvas
@@ -22,5 +23,20 @@ export default abstract class modelAbstract{
   public destroy(){
     this.canvas.removeModel(this)
     this.canvas.renderModels()
+  }
+  protected blast(model:IModel){
+    audio.blast()
+    Array(...Array(8).keys()).reduce((promise,index)=>{
+      return new Promise(resolve=>{
+        setTimeout(()=>{
+          const img = new Image()
+          img.src = `/src//static//images//blasts/blast${index}.gif`
+          img.onload=()=>{
+            this.canvas.ctx.drawImage(img,model.x,model.y,model.width,model.height)
+            resolve(promise)
+          }
+        },100)
+      })
+    },Promise.resolve())
   }
 }

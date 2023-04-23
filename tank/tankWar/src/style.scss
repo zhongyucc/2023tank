@@ -9,6 +9,10 @@ body{
     background-color: #000;
     position: relative;
     border: solid 10px #333;
+    background: url(./static/images/cover/cover.png);
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
     box-sizing: content-box;
     canvas{
       position: absolute;

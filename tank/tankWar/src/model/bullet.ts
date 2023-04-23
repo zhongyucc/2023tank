@@ -1,4 +1,9 @@
+import boss from "../canvas/boss"
 import bullet from "../canvas/bullet"
+import player from "../canvas/player"
+import tank from "../canvas/tank"
+import wall from "../canvas/wall"
+import whiteWall from "../canvas/whiteWall"
 import config from "../config"
 import { directionEnum } from "../enum/directionEnum"
 import { image } from "../service/image"
@@ -19,26 +24,30 @@ export default class Bullet extends modelAbstract {
   render(): void {
     let x = this.x
     let y = this.y
+    let step = this.tank.name=='player'?10:5
     switch (this.direction) {
       case directionEnum.top:
-        y -= 2
+        y -= step
         break
       case directionEnum.right:
-        x += 2
+        x += step
         break
       case directionEnum.bottom:
-        y += 2
+        y += step
         break
       case directionEnum.left:
-        x -= 2
+        x -= step
         break
     }
-    const touchModel=util.isModelTouch(x,y,2,2)
+    const touchModel=util.isModelTouch(x,y,2,2,[...wall.models,...whiteWall.models,...boss.models,...tank.models,...player.models])
     if (util.isCanvasTouch(x, y, 2, 2)) {
       this.destroy()
-    }else if(touchModel){
+    }else if(touchModel && touchModel.name != this.tank.name){
       this.destroy()
-      touchModel.destroy()
+      if(touchModel.name!= 'whiteWall'){
+        touchModel.destroy()
+      }
+      this.blast(touchModel)
     }
      else {
       // 碰撞检测

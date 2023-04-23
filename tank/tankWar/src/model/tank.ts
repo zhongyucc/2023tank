@@ -26,19 +26,19 @@ export default class tank extends modelAbstract {
       let y = this.y
       switch (this.direction) {
         case directionEnum.top:
-          y-=2
+          y -= 2
           break
         case directionEnum.right:
-          x+=2
+          x += 2
           break
         case directionEnum.bottom:
-          y+=2
+          y += 2
           break
         case directionEnum.left:
-          x-=2
+          x -= 2
           break
       }
-      if (util.isModelTouch(x, y) || util.isCanvasTouch(x,y)) {
+      if (util.isModelTouch(x, y) || util.isCanvasTouch(x, y)) {
         this.randomDirection()
       } else {
         this.x = x

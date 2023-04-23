@@ -6,6 +6,7 @@ interface  BulletModelConstructor{
   new (tank:IModel):IModel
 }
 interface IModel{
+  name: string
   render():void
   x:number
   y:number
@@ -22,4 +23,5 @@ interface ICanvas{
   ctx:CanvasRenderingContext2D
   removeModel(model:IModel):void
   renderModels():void
+  stop():void
 }

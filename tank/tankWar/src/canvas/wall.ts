@@ -2,6 +2,9 @@ import config from "../config";
 import model from "../model/wall";
 import canvasAbstract from "./canvasAbstract";
 export default new (class Wall extends canvasAbstract implements ICanvas {
+  stop(): void {
+    throw new Error("Method not implemented.");
+  }
   num(): number {
     return config.wall.num
   }
