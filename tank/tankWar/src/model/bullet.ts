@@ -24,7 +24,7 @@ export default class Bullet extends modelAbstract {
   render(): void {
     let x = this.x
     let y = this.y
-    let step = this.tank.name=='player'?10:5
+    let step = this.tank.name == 'player' ? 10 : 5
     switch (this.direction) {
       case directionEnum.top:
         y -= step
@@ -39,17 +39,17 @@ export default class Bullet extends modelAbstract {
         x -= step
         break
     }
-    const touchModel=util.isModelTouch(x,y,2,2,[...wall.models,...whiteWall.models,...boss.models,...tank.models,...player.models])
+    const touchModel = util.isModelTouch(x, y, 2, 2, [...wall.models, ...whiteWall.models, ...boss.models, ...tank.models, ...player.models])
     if (util.isCanvasTouch(x, y, 2, 2)) {
       this.destroy()
-    }else if(touchModel && touchModel.name != this.tank.name){
+    } else if (touchModel && touchModel.name != this.tank.name) {
       this.destroy()
-      if(touchModel.name!= 'whiteWall'){
+      this.blast(touchModel)
+      if (touchModel.name != 'whiteWall') {
         touchModel.destroy()
       }
-      this.blast(touchModel)
     }
-     else {
+    else {
       // 碰撞检测
       this.x = x
       this.y = y
